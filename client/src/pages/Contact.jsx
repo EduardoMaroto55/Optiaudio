@@ -41,7 +41,7 @@ const Contact = () => {
             </div>
             
         </div>
-        <iframe className='border border-secondary w-[50%] m-auto  bg-cover bg-center mt-20'src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.1684220522343!2d-84.1656086204594!3d10.002943064582826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fa413fddfee9%3A0x4de7d0383d9757d2!2sC.%20Los%20Pianguas%2C%20Heredia!5e0!3m2!1sen!2scr!4v1699387640321!5m2!1sen!2scr" width="600" height="450" style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe className='border border-secondary w-[50%] m-auto  bg-cover bg-center mt-20'src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.1684220522343!2d-84.1656086204594!3d10.002943064582826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fa413fddfee9%3A0x4de7d0383d9757d2!2sC.%20Los%20Pianguas%2C%20Heredia!5e0!3m2!1sen!2scr!4v1699387640321!5m2!1sen!2scr" allowFullScreen width="600" height="450" style={{border:"0"}}  loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
       </section>
     </>
   )

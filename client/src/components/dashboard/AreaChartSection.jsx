@@ -1,53 +1,34 @@
 import React from 'react'
 import { AreaChart, Card, Title } from "@tremor/react";
-const chartdata = [
-    {
-      date: "Jan 22",
-      SemiAnalysis: 2890,
-      "The Pragmatic Engineer": 2338,
-    },
-    {
-      date: "Feb 22",
-      SemiAnalysis: 2756,
-      "The Pragmatic Engineer": 2103,
-    },
-    {
-      date: "Mar 22",
-      SemiAnalysis: 3322,
-      "The Pragmatic Engineer": 2194,
-    },
-    {
-      date: "Apr 22",
-      SemiAnalysis: 3470,
-      "The Pragmatic Engineer": 2108,
-    },
-    {
-      date: "May 22",
-      SemiAnalysis: 3475,
-      "The Pragmatic Engineer": 1812,
-    },
-    {
-      date: "Jun 22",
-      SemiAnalysis: 3129,
-      "The Pragmatic Engineer": 1726,
-    },
-  ];
+
   
-  const valueFormatter = function(number) {
-    return "$ " + new Intl.NumberFormat("us").format(number).toString();
-  };
-  
-const AreaChartSection = () => {
+
+const AreaChartSection = ({data}) => {
+  if (!data[0] || !data[0].rows[0].metricValues) {
+    return <h1>Loading...</h1>;
+}
+const ChartdataArray = data
+  .filter(item => item !== null)
+  .flatMap(item => item.rows.map(row => {
+    const dateStr = row.dimensionValues[0].value; // '20231110'
+    const formattedDate = new Date(dateStr.slice(0, 4), dateStr.slice(4, 6) - 1, dateStr.slice(6, 8))
+      .toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); // 'Apr 22'
+    return {
+      date: formattedDate,
+      "Usuarios totales": Number(row.metricValues[0].value),
+      "Usuarios activos": Number(row.metricValues[0].value),
+    };
+  }));
     return (
         <Card className='mt-4'>
-            <Title>Newsletter revenue over time (USD)</Title>
+            <Title>Usuarios por día </Title>
             <AreaChart
                 className="h-72 mt-4"
-                data={chartdata}
+                data={ChartdataArray}
                 index="date"
-                categories={["SemiAnalysis", "The Pragmatic Engineer"]}
+                categories={["Usuarios totales", "Usuarios activos"]}
                 colors={["indigo", "cyan"]}
-                valueFormatter={valueFormatter}
+           
             />
         </Card>
     )

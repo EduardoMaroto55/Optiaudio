@@ -2,6 +2,12 @@ const mysql = require('mysql');
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const { GoogleAuth } = require('google-auth-library');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+
+
 const saltRounds = 10;
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -132,6 +138,94 @@ app.delete('/deluser', (req, res) => {
   });
 });
 
+
+const auth = new GoogleAuth({
+  keyFilename: './clinicatest-18d5c7f339ea.json',
+  scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
+});
+
+const { BetaAnalyticsDataClient } = require('@google-analytics/data');
+const analyticsDataClient = new BetaAnalyticsDataClient({auth});
+
+app.get('/analytics', async (req, res) => {
+  try {
+    const [response] = await analyticsDataClient.runReport({
+      property: `properties/${process.env.GA4_PROPERTY_ID}`,
+      dateRanges: [
+        {
+          startDate: '2020-10-01',
+          endDate: 'today',
+        },
+      ],
+     dimensions: [ 
+        { name: 'city' },
+     ],
+      metrics: [
+        { name: 'activeUsers' },
+        { name: 'newUsers' },
+        { name: 'engagementRate' },
+      ],
+    });
+
+    const totalUsersResponse = await analyticsDataClient.runReport({
+      property: `properties/${process.env.GA4_PROPERTY_ID}`,
+      dateRanges: [
+        {
+          startDate: '2020-10-01',
+          endDate: 'today',
+        },
+      ],
+      dimensions: [
+        { name: 'date' },
+      ],
+      metrics: [
+        { name: 'totalUsers' },
+        { name: 'activeUsers' },
+      ],
+    });
+
+    res.json({ metricsData: response, totalUsersData: totalUsersResponse });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+app.post('/send-email', (req, res) => {
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'edu5.maroto25@gmail.com',
+      pass: process.env.GM_PASSWORD
+    }
+  });
+  
+  let mailOptions = {
+    from: req.body.email,
+    to: 'edu5.maroto@hotmail.com',
+    subject: `Pregunta optiaudio: ${req.body.name} de ${req.body.email}`,
+    text: `Mensaje: ${req.body.message}. Email y telefono de contacto: ${req.body.email} - ${req.body.phone}`
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.json({ message: 'Email sent successfully' });
+    }
+  }); 
+});
+
+//Email code
+
+
+
+
+
+ 
 app.listen(3000, () => {
   console.log('Server is running at port 3000');
 })

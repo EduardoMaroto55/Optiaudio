@@ -25,7 +25,7 @@ const Footer = () => {
     <>
       <section className=" w-full overflow-hidden h-full sm:h-full flex-col  bg-[#343A40]">
         <div className='flex justify-between items-center max-w-5xl m-auto py-2'>
-          <a href='/home'><img src={Logo} alt='logo Optiaudio' className='w-48 '/></a>
+          <a href='/inicio'><img src={Logo} alt='logo Optiaudio' className='w-48 '/></a>
           <div className='flex gap-5'>
             <a  href='https://www.instagram.com/optiaudiocr/' className='rounded-full p-2 bg-white hover:bg-secondary'><BsInstagram size={20} /></a>
             <a href='https://www.facebook.com/optiaudiocr' className='rounded-full p-2 bg-white  hover:bg-secondary'><BsFacebook size={20} /></a>

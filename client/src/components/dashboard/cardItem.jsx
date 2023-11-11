@@ -1,16 +1,26 @@
 import React from 'react'
 import { BadgeDelta, Card, Flex, Metric, Text } from "@tremor/react";
 
-const cardItem = () => {
+const CardItem = ({data,title,id}) => {
+     if (!data || !data.rows[0].metricValues) {
+        return <h1>Loading...</h1>;
+    }
+
+    const totalMetrics = data.rows.reduce((sum, row) => sum + Number(row.metricValues[id].value), 0);
+    let displayMetrics;
+    if (id === 2) {
+      displayMetrics = `${(totalMetrics / data.rows.length) * 100}%`;
+    } else {
+      displayMetrics = totalMetrics;
+    }
     return (
         <Card className="w-xs" decoration="top" decorationColor="indigo">
             <Flex justifyContent='between' alignItems='center'>
-            <Text>Visitantes únicos</Text>      
-                <BadgeDelta deltaType="moderateIncrease">12.4%</BadgeDelta>             
+            <Text>{title}</Text>                     
             </Flex>
-            <Metric>$ 34,743</Metric>
+            <Metric>{displayMetrics}</Metric>
         </Card>
     )
 }
 
-export default cardItem
+export default CardItem

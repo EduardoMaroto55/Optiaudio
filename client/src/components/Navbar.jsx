@@ -54,7 +54,7 @@ const Navbar = ({ navClass, ulClass, divClass, hasLogo }) => {
     <nav className={navClass}>
       {hasLogo && (
         <div>
-          <Link to='/home'><img src={Logo} alt='logo Optiaudio' className='xl:ml-48 lg:ml-40 w-52' /></Link>
+          <Link to='/inicio'><img src={Logo} alt='logo Optiaudio' className='xl:ml-48 lg:ml-40 w-52' /></Link>
         </div>
       )}
       <ul className={ulClass}>

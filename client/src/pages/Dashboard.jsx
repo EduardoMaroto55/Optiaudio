@@ -1,7 +1,6 @@
-import { React, useState } from 'react'
+import { React, useState, Suspense } from 'react'
 import Sidebar from '../components/dashboard/Sidebar'
 import Estadisticas from '../components/dashboard/EstadisticasSection'
-
 import UsuariosSection from '../components/dashboard/UsuariosSection'
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -25,11 +24,11 @@ const Dashboard = () => {
   const userId = location.state ? location.state.userId : undefined;
 
 
-  if (userId === undefined) {
-    navigate('/login');
-    return null;
-  }
-
+  useEffect(() => {
+    if (userId === undefined) {
+      navigate('/login');
+    }
+  }, [userId, navigate]);
 
   const [view, setView] = useState('dashboard');
   const [errorMessage, setErrorMessage] = useState(null);
@@ -40,7 +39,7 @@ const Dashboard = () => {
     <section className="flex">
       <Sidebar view={setView} />
       <div className="flex flex-col flex-1 relative">
-        <header className="flex items-center h-28 bg-darkColor w-full justify-end p-4 px-6">
+        <header className="flex items-center h-28 bg-slate-800 w-full justify-end p-4 px-6">
           <div className="p-2 bg-gray-200 w-40 rounded-sm text-center">
             <label className='inline-block  whitespace-nowrap'>{user ? user.first_name : 'Loading...'}</label>
           </div>
@@ -49,7 +48,9 @@ const Dashboard = () => {
 
           <main className="flex-grow">
             {view === 'dashboard' && (
+              <Suspense fallback={<div>Loading...</div>}>
               <Estadisticas />
+            </Suspense>
             )}
             {view === 'usuarios' && (
               <>

@@ -3,6 +3,7 @@ import {AiFillDelete} from "react-icons/ai";
 import  {MdModeEditOutline} from "react-icons/md";
 import ModalDialog from '../ModalDialog';
 import { AiOutlinePlus } from "react-icons/ai";
+
 import {
   Badge,
   Card,
@@ -40,8 +41,6 @@ function handleAddOpen() {
   setType("addUser")
   setIsModalOpen(true);
 }
-
-
 
   return (
   <>

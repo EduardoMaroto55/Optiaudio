@@ -14,10 +14,9 @@ export default function Login() {
     event.preventDefault()
     axios.post('http://localhost:3000/login', {email, password})
     .then(response => {
-      console.log(response.data)
+   
       if (response.data.status === 'success') {
         // Redirect to /dashboard
-        console.log(response.data.user.id);
         navigate('/dashboard', { state: { userId: response.data.user.id } });
       } else {
         // Handle error

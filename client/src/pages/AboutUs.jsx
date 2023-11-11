@@ -38,7 +38,7 @@ function AboutUs() {
                 <h2 className='font-bold text-lg mt-5'>Valores</h2>
                 <p>Nuestra clínica se basa en valores como excelencia, profesionalismo, calidad, personalización, ética, innovación, accesibilidad, empatía, educación y responsabilidad social para brindar atención integral en optometría y audiología a nuestros pacientes.</p>
               </div>
-              <img src={doctor} alt='doctor' className='ml-4 w-full  h-full object-cover relative ' />
+              <img src={doctor} alt='doctor' className='ml-4 w-full  h-full  max-w-[720px] object-cover relative ' />
             </div>
           </section>
 
