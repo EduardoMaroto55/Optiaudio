@@ -1,29 +1,33 @@
 import React from 'react'
 import axios from 'axios';
-function handleSubmit(event){
-  event.preventDefault();
 
-  const user = {
-    id: event.target.elements.id.value,
-    name: event.target.elements.name.value,
-    apellido: event.target.elements.apellido.value,
-    email: event.target.elements.email.value,
-    password: event.target.elements.password.value,
-    telefono: event.target.elements.telefono.value
-  };
-
-  axios.post('http://localhost:3000/edituser', user)
-    .then(response => {
-      window.location.reload(); // reload the page
-
-    })
-    .catch(error => {
-      console.error('Error:', error);
-
-    });
- 
-}
 const EditUserForm = (props) => {
+
+  function close() {
+    props.handleClose(); // Close the form when the button is clicked
+  }
+  function handleSubmit(event){
+    event.preventDefault();
+  
+    const user = {
+      id: event.target.elements.id.value,
+      name: event.target.elements.name.value,
+      apellido: event.target.elements.apellido.value,
+      email: event.target.elements.email.value,
+      password: event.target.elements.password.value,
+      telefono: event.target.elements.telefono.value
+    };
+  
+    axios.post('http://localhost:3000/edituser', user)
+      .then(response => {
+        close()
+        window.location.reload(); // reload the page
+      })
+      .catch(error => {
+        console.error('Error:', error);
+  
+      });
+  }
   
   return (
     <form  onSubmit={handleSubmit} className={`flex flex-col gap-7 lg:py-10 py-2 px-4 text-lg sm:w-full  lg:w-96 xl:w-96 rounded-full p-${props.padding}`}>

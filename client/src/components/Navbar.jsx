@@ -16,7 +16,7 @@ const Navbar = ({ navClass, ulClass, divClass, hasLogo }) => {
   const navElements = navLinksState.map(nav => {
     const isExternalLink = nav.link.includes('#' || 'Servicios');
     return (
-      <li key={nav.id}>
+      <li key={nav.id} id={`navElement-${nav.id}`}>
         {isExternalLink ? (
           <a href={nav.link} className="relative w-fit block 
             after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 
@@ -24,7 +24,7 @@ const Navbar = ({ navClass, ulClass, divClass, hasLogo }) => {
             {nav.title}
           </a>
         ) : (
-          <Link to={nav.link} className="relative w-fit block 
+          <Link  to={nav.link} className="relative w-fit block 
             after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 
             after:hover:scale-x-100 after:transition after:duration-300 after:origin-center cursor-pointer hover:text-white">
             {nav.title}

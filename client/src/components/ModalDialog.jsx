@@ -24,8 +24,7 @@ const ModalDialog = (props) => {
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
     <div className='p-5'>
-      
-      <FormComponent handleClose={props.handleClose} selectedUser={props.selectedUser}/>
+      <FormComponent handleClose={props.handleClose} selectedUser={props.selectedUser} users={props.users}/>
     </div>
   </Dialog>
   )

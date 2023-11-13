@@ -11,7 +11,7 @@ const Accordion = (props) => {
   }
 
   return (
-    <button onClick={HandleOpening} className={`border h-auto w-full bg-white border-stone-950 md:mb-3`}>
+    <button data-test={`accordion-${props.id}`} onClick={HandleOpening} className={`border h-auto w-full bg-white border-stone-950 md:mb-3`}>
     <div className={" py-2 px-2 flex justify-between align-middle items-center"}>
       <h4 className="font-semibold text-xs text-[#212529] text-left md:text-base">¿{props.title}?</h4>
       <span className={`float-right transform h-auto w-5 ${isOpened ?
@@ -24,7 +24,7 @@ const Accordion = (props) => {
       style={{ height: height }}
       className=" overflow-hidden text-left transition-all duration-200"
     >
-      <p className="px-3 pb-2 text-xs text-left text-[#212529] sm:text-sm ">{props.data}</p>
+      <p className="px-3 pb-2 text-xs text-left text-[#212529] sm:text-sm   ">{props.data}</p>
     </div>
   </button>
   )

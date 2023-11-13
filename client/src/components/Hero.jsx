@@ -32,7 +32,7 @@ export default function Hero() {
 
     return (
      
-            <section className="w-full h-[80vh] relative ">
+            <section data-test="heroSection" className="w-full h-[80vh] relative ">
                 <div style={backgroundImageStyle} className="w-full h-full  bg-center object-cover" />
                 <div className="max-w-[1140px] m-auto">
                     <div className="absolute top-[35%] w-full md:h-[50%] max-w-[600px] h-full flex flex-col text-white p-4">

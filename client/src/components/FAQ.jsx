@@ -3,7 +3,7 @@ import Button from './Button'
 import Accordion from './Accordion'
 import lobby from "../assets/lobby.jpg"
 import { faqData } from '../constants/index'
-import ModalDialog from '../components/ModalDialog'
+import ModalDialog from './ModalDialog'
 const FAQ = () => {
   const [accordions, setAccordion] = React.useState(faqData)
 
@@ -18,12 +18,13 @@ const FAQ = () => {
     setAccordion(updatedAccordions);
   };
   const loadAccordion = accordions.map((accordion) => (
-    <Accordion
-      key={accordion.key}
+    <Accordion 
+      key={accordion.id}
       title={accordion.title}
       data={accordion.data}
       isOpen={accordion.isOpen}
       toggleAccordion={() => toggleAccordion(accordion.key)}
+      id={accordion.id}
     />
   ))
   const [open,setOpen] = React.useState(false)
@@ -34,7 +35,7 @@ const FAQ = () => {
     setOpen(false)
   }
   return (
-<section id='faq' className={`max-w-[1920px] m-auto w-full h-full justify-centebg-[#f2eeee] gap-10 sm:flex bg-gray-200 sm:flex-row-reverse `}>
+<section data-test="faqSection" id='faq' className={`max-w-[1920px] m-auto w-full h-full justify-centebg-[#f2eeee] gap-10 sm:flex bg-gray-200 sm:flex-row-reverse `}>
         <div className='md:max-w-[50%] sm:h-[100%] h-full bg-cover bg-center m-auto'>
         <img src={lobby} className='w-full ' />
         </div>
@@ -43,7 +44,7 @@ const FAQ = () => {
           <div className={`md:mt-10` }>
             {loadAccordion}
           </div>
-          <Button onClick={handleOpen} text="Envía una pregunta" tailwindClass="bg-secondary border-secondary font-bold text-white rounded-full mt-5 md:text-base text-sm mb-auto" />
+          <Button id="btn-openForm" onClick={handleOpen} text="Envía una pregunta" tailwindClass="bg-secondary border-secondary font-bold text-white rounded-full mt-5 md:text-base text-sm mb-auto" />
           <ModalDialog open={open} handleClose={handleClose}/>
         </div>
     </section>

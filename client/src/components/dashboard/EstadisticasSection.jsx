@@ -12,6 +12,7 @@ useEffect(() => {
   const fetchAnalyticsData = async () => {
     try {
       const response = await axios.get('http://localhost:3000/analytics');
+      console.log(response.data);
       setAnalyticsData(response.data);
     } catch (error) {
       console.error('Failed to fetch analytics data:', error);

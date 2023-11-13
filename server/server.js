@@ -24,7 +24,6 @@ app.use(express.json());
 app.post('/login', (req, res) => {
   const sql = "SELECT * FROM users WHERE email = ?";
   const values = [req.body.email];
-  const finalSql = connection.format(sql, values);
 
   connection.query(sql, values, (err, result) => {
     if (err) {
@@ -41,14 +40,14 @@ app.post('/login', (req, res) => {
         }
         if (isMatch) {
           // Passwords match
-          res.json({ status: 'success', user: result[0] });
+          res.status(200).json({ status: 'success', user: result[0] });
         } else {
           // Passwords don't match
-          res.json({ status: 'error', message: "Wrong username/password combination!" + finalSql });
+          res.status(200).json({ status: 'error', message: "El correo electrónico o contraseña que ingresaste no es correcto."  });
         }
       });
     } else {
-      res.json({ message: "Wrong username/password combination!" + sql });
+      res.status(200).json({ status: 'error', message: "El correo electrónico o contraseña que ingresaste no es correcto." });
     }
   });
 });

@@ -19,16 +19,16 @@ const Servicios = () => {
   ),[])
 
   return (
-    <div style={blackGradient} className="max-w-[1920px] m-auto w-full  h-full py-10 ">
+    <section data-test="servicesSection" style={blackGradient} className="max-w-[1920px] m-auto w-full  h-full py-10 ">
       <h1 className='text-white text-center text-3xl font-extrabold'>Servicios que ofrecemos</h1>
       <h4 className='text-[#5ABEE7] text-center text-sm'>Comprometidos con tu salud y bienestar</h4>
       <div className={`flex flex-col sm:flex-row sm:items-stretch justify-center items-center sm:gap-10  my-5 `}>
         {imageCards}
       </div>
       <div className="flex justify-center mt-4">
-      <Link to="/servicios"><Button tailwindClass="border-secondary bg-white text-secondary rounded text-lg" text="Ver Todos"/></Link>
+      <Link id='btn-services' to="/servicios"><Button tailwindClass="border-secondary bg-white text-secondary rounded text-lg" text="Ver Todos"/></Link>
       </div>
-    </div>
+    </section>
 
 
   )

@@ -26,8 +26,8 @@ function DeleteUserForm(props) {
   <form onSubmit={handleSubmit} className={`flex flex-col gap-3 p-5 rounded-full p-${props.padding}`}>
     <h1 className='font-bold text-lg mb-5'>¿Desea Eliminar el usuario?</h1>        
     <div className='flex justify-center'>
-    <button className='max-w-[70%] ml-auto rounded-full border border-secondary p-1 px-3 hover:bg-secondary hover:text-white' type='submit'>Si</button>
-    <button onClick={handleCancelClick} className='max-w-[70%] ml-auto rounded-full border border-secondary p-1 px-3 hover:bg-secondary hover:text-white'>No</button>
+    <button className='max-w-[70%] mx-auto rounded-full border border-secondary p-1 px-3 hover:bg-secondary hover:text-white' type='submit'>Si</button>
+    <button onClick={handleCancelClick} className='max-w-[70%] mx-auto rounded-full border border-secondary p-1 px-3 hover:bg-secondary hover:text-white'>No</button>
     </div>
 </form>
   )

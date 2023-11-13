@@ -1,4 +1,4 @@
-import { React, useState, Suspense } from 'react'
+import { React, useState, Suspense, useMemo } from 'react'
 import Sidebar from '../components/dashboard/Sidebar'
 import Estadisticas from '../components/dashboard/EstadisticasSection'
 import UsuariosSection from '../components/dashboard/UsuariosSection'
@@ -10,27 +10,34 @@ import { useLocation } from 'react-router-dom';
 const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
-  useEffect(() => {
-    axios.get('http://localhost:3000/getusers')
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
-        setErrorMessage('An error occurred.');
-      })
-  }, [])
-  const [users, setUsers] = useState([]);
   const userId = location.state ? location.state.userId : undefined;
-
-
+  const [users, setUsers] = useState([]);
+  
   useEffect(() => {
     if (userId === undefined) {
       navigate('/login');
     }
   }, [userId, navigate]);
 
-  const [view, setView] = useState('dashboard');
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/getusers');
+      setUsers(response.data);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage('An error occurred.');
+    }
+  }
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+ 
+
+  const [view, updateView] = useState(localStorage.getItem('view') || 'dashboard');
+  const setView = (newView) => {
+    localStorage.setItem('view', newView);
+    updateView(newView);
+  };
   const [errorMessage, setErrorMessage] = useState(null);
 
   const user = users.find(user => Number(user.id) === Number(userId));
@@ -47,17 +54,15 @@ const Dashboard = () => {
         <div className="flex flex-row h-full">
 
           <main className="flex-grow">
-            {view === 'dashboard' && (
-              <Suspense fallback={<div>Loading...</div>}>
-              <Estadisticas />
-            </Suspense>
-            )}
-            {view === 'usuarios' && (
-              <>
-                <UsuariosSection users={users} />
-                
-              </>
-            )}
+       
+          {view === 'dashboard' && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Estadisticas />
+          </Suspense>
+        )}
+        {view === 'usuarios' && (
+          <UsuariosSection users={users} />
+        )}
           </main>
         </div>
       </div>

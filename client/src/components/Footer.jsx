@@ -15,20 +15,20 @@ const Footer = () => {
   ))
 
   const navElements = navLinksState.map(nav => (  
-      <li key={nav.id} className='hover:text-secondary'><a href={nav.link}>{nav.title}</a></li>
+      <li key={nav.id} className='hover:text-secondary'><a id={`footerNav-${nav.id}`} href={nav.link}>{nav.title}</a></li>
   ))
 
 
 
 
   return (
-    <>
-      <section className=" w-full overflow-hidden h-full sm:h-full flex-col  bg-[#343A40]">
+    <section data-test="footerSection">
+      <div className=" w-full overflow-hidden h-full sm:h-full flex-col  bg-[#343A40]">
         <div className='flex justify-between items-center max-w-5xl m-auto py-2'>
-          <a href='/inicio'><img src={Logo} alt='logo Optiaudio' className='w-48 '/></a>
+          <a id="btn-logoInicio" href='/inicio'><img src={Logo} alt='logo Optiaudio' className='w-48 '/></a>
           <div className='flex gap-5'>
-            <a  href='https://www.instagram.com/optiaudiocr/' className='rounded-full p-2 bg-white hover:bg-secondary'><BsInstagram size={20} /></a>
-            <a href='https://www.facebook.com/optiaudiocr' className='rounded-full p-2 bg-white  hover:bg-secondary'><BsFacebook size={20} /></a>
+            <a  id="instagramNav" href='https://www.instagram.com/optiaudiocr/' className='rounded-full p-2 bg-white hover:bg-secondary'><BsInstagram size={20} /></a>
+            <a id="facebookNav" href='https://www.facebook.com/optiaudiocr' className='rounded-full p-2 bg-white  hover:bg-secondary'><BsFacebook size={20} /></a>
           </div>
 
         </div>
@@ -56,13 +56,13 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </div>
       <div className='bg-secondary w-full h-10 flex justify-end items-center'>
         <p className='text-white mr-10'>
           Copyright © 2023
         </p>
       </div>
-    </>
+    </section>
   )
 }
 

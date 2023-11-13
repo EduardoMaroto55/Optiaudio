@@ -46,7 +46,7 @@ function handleAddOpen() {
   <>
     <Card className='mt-24 max-w-[95%] ml-10'>
     <Title>Lista de Usuarios</Title>
-    <ModalDialog open={isModalOpen} handleClose={handleClose} formType={type} data={props.users} selectedUser={selectedUser}/>
+    <ModalDialog open={isModalOpen} handleClose={handleClose} formType={type} data={props.users}  selectedUser={selectedUser}/>
     <Table className="mt-5">
       <TableHead>
         <TableRow>

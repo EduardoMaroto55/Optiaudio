@@ -1,5 +1,5 @@
 import React from 'react'
-import { BadgeDelta, Card, Flex, Metric, Text } from "@tremor/react";
+import {  Card, Flex, Metric, Text } from "@tremor/react";
 
 const CardItem = ({data,title,id}) => {
      if (!data || !data.rows[0].metricValues) {
