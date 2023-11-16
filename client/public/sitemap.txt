@@ -1,0 +1,8 @@
+http://localhost:5173/inicio
+http://localhost:5173/servicios
+http://localhost:5173/sobreNosotros
+http://localhost:5173/contacto
+http://localhost:5173/servicios
+http://localhost:5173/servicio/1
+http://localhost:5173/servicio/2
+http://localhost:5173/servicio/3

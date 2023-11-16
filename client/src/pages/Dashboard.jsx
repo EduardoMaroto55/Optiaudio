@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -44,6 +45,9 @@ const Dashboard = () => {
 
   return (
     <section className="flex">
+      <Helmet>
+        <meta name="robots" content="noindex" /> 
+       </Helmet>
       <Sidebar view={setView} />
       <div className="flex flex-col flex-1 relative">
         <header className="flex items-center h-28 bg-slate-800 w-full justify-end p-4 px-6">

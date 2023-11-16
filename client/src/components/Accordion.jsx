@@ -13,10 +13,10 @@ const Accordion = (props) => {
   return (
     <button data-test={`accordion-${props.id}`} onClick={HandleOpening} className={`border h-auto w-full bg-white border-stone-950 md:mb-3`}>
     <div className={" py-2 px-2 flex justify-between align-middle items-center"}>
-      <h4 className="font-semibold text-xs text-[#212529] text-left md:text-base">¿{props.title}?</h4>
+      <h3 className="font-semibold text-xs text-[#212529] text-left md:text-base">¿{props.title}?</h3>
       <span className={`float-right transform h-auto w-5 ${isOpened ?
         'rotate-180' : 'rotate-0'} transition-transform duration-300`}>
-        <img src={angleBlue}/>
+        <img src={angleBlue} alt="Accordion Toggle Flecha" title="Flecha" />
       </span>
     </div>
     <div

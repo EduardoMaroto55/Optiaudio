@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-
-
-
 function EmailForm(props) {
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,7 +22,7 @@ function EmailForm(props) {
 
    async function handleSubmit(event) {
     event.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@áéíóú]+@[^\s@]+\.[^\s@]+$/;
     
     if (!formData.email || !formData.name || !formData.phone || !formData.message ) {
       setErrorMessage('Por favor ingrese todos los datos.');
@@ -52,13 +49,13 @@ function EmailForm(props) {
     <div> 
       {emailSent ? (
         <div className='flex flex-col justify-center text-lg'>
-      <h1>Tu correo fue enviado!</h1>
-      <button id="btn-emailOk" className='w-[50%] m-auto rounded-xl bg-slate-900 mt-3 text-white ' onClick={() => props.handleClose()}>ok</button>
+      <h2>Tu correo fue enviado!</h2>
+      <button id="btn-emailOk" className='w-[50%] m-auto rounded-xl bg-slate-900 mt-3 text-white ' onClick={() => setEmailSent(flase)}>ok</button>
         </div>
   
     ) : (
     <form onSubmit={handleSubmit} className={`flex flex-col gap-3  py-2 px-4 text-lg sm:w-full  lg:w-96 xl:w-96 rounded-full p-${props.padding}`}>
-      <h1 className='font-bold text-xl mb-2 w-full'>Haz una pregunta</h1>
+      <h2 className='font-bold text-xl mb-2 w-full'>Haz una pregunta</h2>
       {errorMessage && <p className='text-orange-600 text-base '>{errorMessage}</p>}
       <label htmlFor="name" className="sr-only">Tu nombre</label>
       <input id="name" onBlur={handleChange} className={`rounded-lg border ${errorMessage ? 'border-orange-500' : 'border-black/60'} p-2 px-4 w-full`} type='text' placeholder='Tu nombre*' required></input>

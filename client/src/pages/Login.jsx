@@ -15,7 +15,7 @@ export async function validateLogin(email, password) {
 export default function Login() {
   //style for the background image
   const backgroundImageStyle = {
-    backgroundImage: `url("../../bush.png")`
+    backgroundImage: `url("../../images/bush.png")`
   };  
 
   //states
@@ -53,7 +53,7 @@ export default function Login() {
   }
   return (
     <section className="w-full min-h-screen px-6  flex items-center justify-center " style={backgroundImageStyle}>
-    <div className="bg-white px-10 pb-20 rounded-3xl shadow-md w-full max-w-md sm:w-3/4 lg:w-1/2 xl:w-1/3">
+    <div className="bg-white px-10 pb-20 rounded-3xl shadow-2xl shadow-black w-full max-w-md sm:w-3/4 lg:w-1/2 xl:w-1/3">
       <h1 className="text-center text-3xl font-bold p-3">Iniciar Sesión</h1>
       <hr style={{borderTop: "1px solid gray ",}} className='mb-14'/>
      

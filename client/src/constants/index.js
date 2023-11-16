@@ -66,7 +66,7 @@ export const services = [
   {
     id: "1",
     title: "Exámenes de la Vista",
-    description: "En nuestra clínica, nos especializamos en ofrecer exámenes de la vista completos y precisos para garantizar una visión óptima. Nuestra dedicada experta en optometría evaluará tu salud ocular y te recetará lentes personalizados.",
+    description: "Nos especializamos en ofrecer exámenes de la vista completos y precisos para garantizar una visión óptima. Nuestra dedicada experta en optometría evaluará tu salud ocular y te recetará lentes personalizados.",
     img: eyeExam,
   },
   {
