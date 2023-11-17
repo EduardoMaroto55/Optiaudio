@@ -29,7 +29,7 @@ function AboutUs() {
             <div className='flex flex-row-reverse '>
               <img src={polka} title="polka patter" alt='polka patter'  className=' z-[-2] object-contain md:block hidden absolute top-1/2 right-36 transform  -translate-y-1/2'  />
               <div className='lg:max-w-[60%] w-full md:mr-auto z-10'>
-                <h1 className='text-black font-bold text-3xl mb-10'>Quienes Somos</h1>
+                <h1 className='text-black font-bold text-3xl mb-10'>Conozca a Optiaudio: Quienes Somos</h1>
                 <p className='md:mt-8 text-sm md:text-base max-w-xl w-full text-darkColor '>En esta clínica, no solo nos preocupamos por la corrección de la visión y la audición, sino que también nos esforzamos por comprender las <strong>necesidades</strong> únicas de cada <strong>individuo</strong>.
       
                   Si busca atención profesional, personalizada y de calidad en óptica y audiología, confíe en nosotros. En cada consulta, nos esforzamos por mantener los más altos estándares de excelencia en el cuidado de la visión y la audición.</p>

@@ -26,7 +26,7 @@ function Services() {
         <meta property="og:type" content="website" />
        </Helmet>
       <div className='max-w-4xl m-auto mb-10'>
-        <h1 className='font-bold text-3xl text-darkColor'>Servicios</h1>
+        <h1 className='font-bold text-3xl text-darkColor'>Servicios de Optometría y Audiología</h1>
       </div>
       {renderServices}
     </section>

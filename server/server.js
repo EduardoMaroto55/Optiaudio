@@ -5,23 +5,25 @@ const bcrypt = require('bcrypt');
 const { GoogleAuth } = require('google-auth-library');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-
-
-
 const saltRounds = 10;
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '12345',
-  database: 'clinica'
-});
-
 const app = express();
-
 app.use(cors());
 app.use(express.json());
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
+const rateLimit = require('express-rate-limit');
 
-app.post('/login', (req, res) => {
+const connection = mysql.createConnection({
+  host:  process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+});
+
+
+
+
+apiRouter.post('/login', (req, res) => {
   const sql = "SELECT * FROM users WHERE email = ?";
   const values = [req.body.email];
 
@@ -54,7 +56,7 @@ app.post('/login', (req, res) => {
 
 // Enpoints para el CRUD de usuarios
 // Endpoint para consultar todos los usuarios
-app.get('/getusers', (req, res) => {
+apiRouter.get('/getusers', (req, res) => {
   const sql = "SELECT id, first_name, last_name, phone_number, password, email FROM users";
   connection.query(sql, (err, result) => {
     if (err) {
@@ -68,7 +70,7 @@ app.get('/getusers', (req, res) => {
 
 
 // Endpoint para agregar un usuario
-app.post('/adduser', (req, res) => {
+apiRouter.post('/adduser', (req, res) => {
   const { name, apellido, email, password, telefono } = req.body;
   // Hash the password
   bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
@@ -89,7 +91,7 @@ app.post('/adduser', (req, res) => {
   });
 });
 
-app.post('/edituser', (req, res) => {
+apiRouter.post('/edituser', (req, res) => {
   const { name, apellido, email, password, telefono,id } = req.body;
   let sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE id = ?";
   let values = [name, apellido, email, telefono, id];
@@ -122,7 +124,7 @@ app.post('/edituser', (req, res) => {
   }
 });
 
-app.delete('/deluser', (req, res) => {
+apiRouter.delete('/deluser', (req, res) => {
   const userId = req.body.id;
   connection.query('DELETE FROM users WHERE id = ?', [userId], (err, results) => {
     if (err) {
@@ -139,20 +141,20 @@ app.delete('/deluser', (req, res) => {
 
 
 const auth = new GoogleAuth({
-  keyFilename: './clinicatest-18d5c7f339ea.json',
+  keyFilename: './optiaudio-507a2d27edce.json',
   scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
 });
 
 const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 const analyticsDataClient = new BetaAnalyticsDataClient({auth});
 
-app.get('/analytics', async (req, res) => {
+apiRouter.get('/analytics', async (req, res) => {
   try {
     const [response] = await analyticsDataClient.runReport({
       property: `properties/${process.env.GA4_PROPERTY_ID}`,
       dateRanges: [
         {
-          startDate: '2020-10-01',
+          startDate: '2020-11-16',
           endDate: 'today',
         },
       ],
@@ -170,7 +172,7 @@ app.get('/analytics', async (req, res) => {
       property: `properties/${process.env.GA4_PROPERTY_ID}`,
       dateRanges: [
         {
-          startDate: '2020-10-01',
+          startDate: '2020-11-16',
           endDate: 'today',
         },
       ],
@@ -181,8 +183,16 @@ app.get('/analytics', async (req, res) => {
         { name: 'totalUsers' },
         { name: 'activeUsers' },
       ],
+      orderBys: [
+        { 
+          dimension: {
+            dimensionName: 'date',
+          }, 
+          sortOrder: 'ASCENDING' 
+        },
+      ],
     });
-
+   
     res.json({ metricsData: response, totalUsersData: totalUsersResponse });
   } catch (err) {
     console.error(err);
@@ -191,19 +201,26 @@ app.get('/analytics', async (req, res) => {
 });
 
 
+const apiLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 5, // limit each IP to 5 requests per windowMs
+  handler: function(req, res, /*next*/) {
+    res.status(429).json({ message: 'Demasiadas solicitudes, por favor intenta de nuevo más tarde.' });
+  }
+});
 
-app.post('/send-email', (req, res) => {
+apiRouter.post('/send-email',apiLimiter, (req, res) => {
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'edu5.maroto25@gmail.com',
+      user: 'optiaudiositioweb@gmail.com',
       pass: process.env.GM_PASSWORD
     }
   });
   
   let mailOptions = {
     from: req.body.email,
-    to: 'edu5.maroto@hotmail.com',
+    to: 'optiaudiositioweb@gmail.com',
     subject: `Pregunta optiaudio: ${req.body.name} de ${req.body.email}`,
     text: `Mensaje: ${req.body.message}. Email y telefono de contacto: ${req.body.email} - ${req.body.phone}`
   };
@@ -219,10 +236,6 @@ app.post('/send-email', (req, res) => {
 });
 
 //Email code
-
-
-
-
 
  
 app.listen(3000, () => {

@@ -30,7 +30,7 @@ const Contact = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       <section className='p-20 '>
-        <h1 className='font-bold text-3xl lg:ml-[5%] xl:ml-[15%] mb-10'>Contáctanos</h1>
+        <h1 className='font-bold text-3xl lg:ml-[5%] xl:ml-[15%] mb-10'>Contáctanos hoy</h1>
         <div className="flex-[1.5] w-full flex flex-row flex-wrap mt-10 gap-10 md:mt-0 md:gap-32 justify-center lg:text-base">
           <div>
             <h2 className='text-lg md:text-xl font-bold mb-2'>Horario</h2>
@@ -52,7 +52,7 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <EmailForm  handleClose={handleClose}/>
+            <EmailForm  handleClose={handleClose} isModal={true}/>
           </div>
 
         </div>

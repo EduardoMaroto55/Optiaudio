@@ -36,12 +36,12 @@ const MainContent = () => {
         <Routes>
         <Route index element={<Layout navbarType={'type2'}><Homepage /></Layout>} />
         <Route path='/inicio' element={<Layout navbarType={'type2'}><Homepage /></Layout>} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/servicios" element={<Layout navbarType={'type1'}><Services /></Layout>} />
         <Route path='/sobreNosotros' element={<Layout navbarType={'type1'}><AboutUs /></Layout>} />
         <Route path='/contacto' element={<Layout navbarType={'type1'}><Contact /></Layout>} />
         <Route path='/servicio/:servicioId' element={<Layout navbarType={'type1'}><Service /></Layout>} />
         <Route path='/login' element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path='*' element={<NoPage />} />
       </Routes>
     </Suspense>

@@ -29,7 +29,7 @@ describe('AddUserForm', () => {
       fireEvent.submit(screen.getByRole('form'));
   
       await waitFor(() => {
-        expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/adduser', {
+        expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/api/adduser', {
           name: 'Test Name',
           apellido: 'Test Apellido',
           // Add more fields as needed

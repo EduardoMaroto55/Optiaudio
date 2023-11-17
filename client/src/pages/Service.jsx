@@ -11,7 +11,7 @@ function Service() {
    <section>
   <Helmet>
   <title>{`${servicesState.title} | Optiaudio | Clínica Optometría y Audiología | Heredia, Costa Rica`}</title>
-  <meta name="description" content={`Ofrecemos servicios de ${servicesState.title} en nuestra clínica Optiaudio en Heredia. Aquí encontrará información detallada sobre nuestros servicios de ${servicesState.title}.`} />
+  <meta name="description" content={`Ofrecemos servicios de ${servicesState.title} en nuestra clínica Optiaudio en Heredia. Aquí encontrará información detallada sobre nuestros servicios ${servicesState.title}.`} />
   <link rel="canonical" href={`http://localhost:5173/servicios/${servicioId}`} />
   <meta property="og:title" content={`${servicesState.title} | Optiaudio |Clínica de Optometría y Audiología | Heredia, Costa Rica`} />
   <meta property="og:description" content={`Ofrecemos servicios de ${servicesState.title} en nuestra clínica Optiaudio en Heredia. Aquí encontrará información detallada sobre nuestros servicios de ${servicesState.title}.`} />

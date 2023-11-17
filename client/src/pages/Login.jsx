@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export async function validateLogin(email, password) {
   try {
-    const response = await axios.post('http://localhost:3000/login', { email, password });
+    const response = await axios.post('http://localhost:3000/api/login', { email, password });
     console.log(response);
     return response;
   } catch (error) {

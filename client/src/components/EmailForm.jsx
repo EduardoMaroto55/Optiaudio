@@ -37,23 +37,27 @@ function EmailForm(props) {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/send-email', formData);
+      const response = await axios.post('http://localhost:3000/api/send-email', formData);
       setEmailSent(true);
     
     } catch (error) {
-      console.error('Error sending email:', error);
+      setErrorMessage(error.response.data.message); 
     }
   }
 
   return (
     <div> 
-      {emailSent ? (
-        <div className='flex flex-col justify-center text-lg'>
+      {errorMessage ? (
+    <div className='flex flex-col justify-center text-lg'>
+      <h2>Error: {errorMessage}</h2>
+      <button id="btn-errorOk" className='w-[50%] m-auto rounded-xl bg-slate-900 mt-3 text-white ' onClick={() => { setErrorMessage(''); props.isModal ? setEmailSent(false) : props.handleClose(); }}>ok</button>
+    </div>
+  ) : emailSent ? (
+    <div className='flex flex-col justify-center text-lg'>
       <h2>Tu correo fue enviado!</h2>
-      <button id="btn-emailOk" className='w-[50%] m-auto rounded-xl bg-slate-900 mt-3 text-white ' onClick={() => setEmailSent(flase)}>ok</button>
-        </div>
-  
-    ) : (
+      <button id="btn-emailOk" className='w-[50%] m-auto rounded-xl bg-slate-900 mt-3 text-white ' onClick={() => props.isModal ?  setEmailSent(false) : props.handleClose() }>ok</button>
+    </div>
+  ) :(
     <form onSubmit={handleSubmit} className={`flex flex-col gap-3  py-2 px-4 text-lg sm:w-full  lg:w-96 xl:w-96 rounded-full p-${props.padding}`}>
       <h2 className='font-bold text-xl mb-2 w-full'>Haz una pregunta</h2>
       {errorMessage && <p className='text-orange-600 text-base '>{errorMessage}</p>}

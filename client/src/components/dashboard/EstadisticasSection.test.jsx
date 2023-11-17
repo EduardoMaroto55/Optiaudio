@@ -21,7 +21,7 @@ describe('dashboard  validation', async () => {
     render(<Router><EstadisticasSection /></Router>);
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/analytics');
+      expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/api/analytics');
     });
 
   });
