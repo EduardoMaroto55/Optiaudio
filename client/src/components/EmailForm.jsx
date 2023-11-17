@@ -37,7 +37,7 @@ function EmailForm(props) {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/api/send-email', formData);
+      const response = await axiosInstance.post('/send-email', formData);
       setEmailSent(true);
     
     } catch (error) {

@@ -18,7 +18,7 @@ const EditUserForm = (props) => {
       telefono: event.target.elements.telefono.value
     };
   
-    axios.post('http://localhost:3000/api/edituser', user)
+    axiosInstance.post('/edituser', user)
       .then(response => {
         close()
         window.location.reload(); // reload the page

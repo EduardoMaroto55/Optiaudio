@@ -4,7 +4,11 @@ function DeleteUserForm(props) {
   function handleSubmit(event){
     const userId = props.selectedUser.id;
     event.preventDefault();
-    axios.delete('http://localhost:3000/api/deluser', { data: { id: userId } })
+    const axiosInstance = axios.create({
+      baseURL: process.env.REACT_APP_API_URL,
+      timeout: 1000,
+    });
+    axiosInstance.delete('/deluser', { data: { id: userId } })
       .then(response => {
        
         window.location.reload(); // reload the page

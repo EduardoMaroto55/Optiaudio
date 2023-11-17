@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/getusers');
+      const response = await axiosInstance.get('/getusers');
       setUsers(response.data);
     } catch (error) {
       console.log(error);

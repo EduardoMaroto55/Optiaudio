@@ -11,7 +11,7 @@ export function handleSubmit(event){
     telefono: event.target.elements.telefono.value
   };
 
-  axios.post('http://localhost:3000/api/adduser', user)
+  axiosInstance.post('/adduser', user)
     .then(response => {
       
       window.location.reload(); // reload the page

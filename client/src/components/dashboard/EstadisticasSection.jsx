@@ -11,7 +11,7 @@ const Estadisticas = () => {
 useEffect(() => {
   const fetchAnalyticsData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/analytics');
+      const response = await axiosInstance.get('/analytics');
       console.log(response.data);
       setAnalyticsData(response.data);
     } catch (error) {
