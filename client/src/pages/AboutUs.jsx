@@ -14,7 +14,7 @@ function AboutUs() {
   return (
     <>
       <Helmet>
-        <title>Sobre Nosotros - Optiaudio - Clínica Optometría y Audiología</title>
+        <title>Sobre Nosotros | Optiaudio | Clínica Optometría y Audiología</title>
         <meta name="description" content="Aprenda más sobre Optiaudio, nuestra clínica de optometría y audiología en Heredia. Descubra nuestra misión, valores y compromiso con la salud visual y auditiva." />
         <link rel="canonical" href="http://localhost:5173/sobreNosotros" />
         <meta property="og:title" content="Sobre Nosotros - Optiaudio - Clínica de Optometría y Audiología en Heredia" />

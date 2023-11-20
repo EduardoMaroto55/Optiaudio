@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_APP_API_URL,
+  timeout: 1000,
+});
 
 export async function validateLogin(email, password) {
+ 
   try {
     const response = await axiosInstance.post('/login', { email, password });
-    console.log(response);
+    if (response.data.status === 'success') {
+      localStorage.setItem('jwt', response.data.token);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    }
     return response;
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
+
 export default function Login() {
   //style for the background image
   const backgroundImageStyle = {
@@ -42,7 +51,6 @@ export default function Login() {
     try {
       const response = await validateLogin(email, password);
       if (response.data.status === 'success') {
-        console.log(response);
         navigate('/dashboard', { state: { userId: response.data.user.id } });
       } else {
         setErrorMessage(response.data.message);

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-
+const token = localStorage.getItem('jwt');
 const EditUserForm = (props) => {
 
   function close() {
@@ -17,7 +17,13 @@ const EditUserForm = (props) => {
       password: event.target.elements.password.value,
       telefono: event.target.elements.telefono.value
     };
-  
+
+  const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_APP_API_URL,
+      timeout: 1000,
+       headers: { Authorization: `Bearer ${token}` } // Include the token in the Authorization header
+    });
+    
     axiosInstance.post('/edituser', user)
       .then(response => {
         close()

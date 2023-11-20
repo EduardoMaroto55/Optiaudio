@@ -7,7 +7,13 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-
+ const token = localStorage.getItem('jwt'); 
+ const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_APP_API_URL,
+      timeout: 1000,
+      headers: { Authorization: `Bearer ${token}` } // Include the token in the Authorization header
+    });
+   
 const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();

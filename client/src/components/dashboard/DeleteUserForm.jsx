@@ -1,22 +1,23 @@
 import React from 'react'
 import axios from 'axios';
+const token = localStorage.getItem('jwt');
 function DeleteUserForm(props) {
   function handleSubmit(event){
     const userId = props.selectedUser.id;
     event.preventDefault();
     const axiosInstance = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
+      baseURL: import.meta.env.VITE_APP_API_URL,
       timeout: 1000,
+       headers: { Authorization: `Bearer ${token}` } // Include the token in the Authorization header
     });
-    axiosInstance.delete('/deluser', { data: { id: userId } })
-      .then(response => {
-       
-        window.location.reload(); // reload the page
-      })
-      .catch(error => {
-        console.error('Error:', error);
-  
-      });
+     axiosInstance.delete('/deleteuser', { data: { id: userId } })
+    .then(() => {
+      window.location.reload(); // reload the page
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+ 
 
   }
 

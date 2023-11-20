@@ -6,13 +6,15 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 const Estadisticas = () => {
-
+  const axiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_APP_API_URL,
+    timeout: 5000,
+  });
   const [analyticsData, setAnalyticsData] = useState(null);
 useEffect(() => {
   const fetchAnalyticsData = async () => {
     try {
       const response = await axiosInstance.get('/analytics');
-      console.log(response.data);
       setAnalyticsData(response.data);
     } catch (error) {
       console.error('Failed to fetch analytics data:', error);

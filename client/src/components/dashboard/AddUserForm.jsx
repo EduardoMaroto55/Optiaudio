@@ -10,6 +10,13 @@ export function handleSubmit(event){
     password: event.target.elements.password.value,
     telefono: event.target.elements.telefono.value
   };
+ const token = localStorage.getItem('jwt');
+console.log(token)
+ const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_APP_API_URL,
+      timeout: 1000,
+      headers: { Authorization: `Bearer ${token}` } // Include the token in the Authorization header
+    });
 
   axiosInstance.post('/adduser', user)
     .then(response => {

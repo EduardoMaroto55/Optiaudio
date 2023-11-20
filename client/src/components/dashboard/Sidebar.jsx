@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../assets/Logo.png'
+import Logo from '../../assets/logo.png'
 import { BiSolidDashboard, BiLogOut } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 import { Link } from 'react-router-dom'

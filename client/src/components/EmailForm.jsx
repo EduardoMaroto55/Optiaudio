@@ -19,11 +19,17 @@ function EmailForm(props) {
   };
 
   const [emailSent, setEmailSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+   const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_APP_API_URL,
+      timeout: 3000,
+    });
    async function handleSubmit(event) {
     event.preventDefault();
     const emailRegex = /^[^\s@áéíóú]+@[^\s@]+\.[^\s@]+$/;
-    
+    setIsSubmitting(true);
+
     if (!formData.email || !formData.name || !formData.phone || !formData.message ) {
       setErrorMessage('Por favor ingrese todos los datos.');
       return;
@@ -38,10 +44,12 @@ function EmailForm(props) {
     }
     try {
       const response = await axiosInstance.post('/send-email', formData);
-      setEmailSent(true);
-    
+      setEmailSent(true);    
     } catch (error) {
-      setErrorMessage(error.response.data.message); 
+       setErrorMessage(error.response.message); 
+    } finally {
+      // Set isSubmitting back to false after the request is complete
+      setIsSubmitting(false);
     }
   }
 
@@ -69,7 +77,7 @@ function EmailForm(props) {
       <input id="phone" onBlur={handleChange} className='rounded-lg border border-black p-2 px-4 w-full' type='tel' placeholder='Tu teléfono*' required></input>
       <label htmlFor="message" className="sr-only">Tu mensaje</label>
       <textarea maxLength={500} id="message" onBlur={handleChange} className='rounded-lg border border-black p-2 px-4 w-full' type='textBox ' placeholder='Tu mensaje*' required></textarea>
-      <button id="btn-sendEmail" className='max-w-[70%] h-auto ml-auto rounded-full border border-secondary p-2 px-4 hover:bg-secondary hover:text-white text-lg' type='submit'>Envíar pregunta</button>
+      <button id="btn-sendEmail" className='max-w-[70%] h-auto ml-auto rounded-full border border-secondary p-2 px-4 hover:bg-secondary hover:text-white text-lg' type='submit'  disabled={isSubmitting}>Envíar pregunta</button>
     </form>)}
   </div>
   )

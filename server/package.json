@@ -47,6 +47,11 @@
     
   "express-rate-limit": "^7.1.4",
   
+  
+
+  "jsonwebtoken": "^9.0.2",
+  
+
     
   "mysql": "^2.18.1",
   
